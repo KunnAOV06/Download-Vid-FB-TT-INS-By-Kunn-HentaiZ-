@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunn Sóc Lọ - Download Videos & Images</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --success-color: #00b894;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Download Form */
+        .download-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .input-group {
+            display: flex;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .input-group button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group button:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+        
+        .platform-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .platform-btn {
+            background: white;
+            border: 2px solid #eee;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .platform-btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .platform-btn:hover, .platform-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .tiktok-btn { color: #000000; }
+        .fb-btn { color: #1877F2; }
+        .ig-btn { color: #E4405F; }
+        .yt-btn { color: #FF0000; }
+        .twitter-btn { color: #1DA1F2; }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f9f9f9 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 1;
+        }
+        
+        /* Results Section */
+        .results {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f9f9f9 100%);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-thumbnail {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .result-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .result-card:hover .result-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .result-info {
+            padding: 20px;
+        }
+        
+        .result-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .result-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Results Container */
+        .download-results {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .download-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .download-option {
+            flex: 1;
+            min-width: 200px;
+            background: #f5f6fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .download-option h4 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .download-option p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .option-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-btn:hover {
+            box-shadow: 0 3px 10px rgba(108, 92, 231, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Error Message */
+        .error-message {
+            display: none;
+            color: #e74c3c;
+            background: #fdecea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                border-radius: 15px;
+            }
+            
+            .input-group input {
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .input-group button {
+                padding: 15px;
+                border-radius: 0 0 15px 15px;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .step {
+                flex: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .download-option {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-cloud-download-alt"></i>
+                <span>Kunn Sóc Lọ</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#supported-platforms">Supported Platforms</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Download Videos & Images Without Watermark</h1>
+            <p>Download high-quality videos and images from TikTok, Facebook, Instagram, and more without any logos or watermarks.</p>
+            
+            <div class="download-form">
+                <div class="platform-selector">
+                    <button class="platform-btn tiktok-btn active" data-platform="tiktok">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <button class="platform-btn fb-btn" data-platform="facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button class="platform-btn ig-btn" data-platform="instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <button class="platform-btn yt-btn" data-platform="youtube">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                    <button class="platform-btn twitter-btn" data-platform="twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="video-url">Paste your video link here</label>
+                    <div class="input-group">
+                        <input type="text" id="video-url" placeholder="https://www.tiktok.com/@username/video/123456789" required>
+                        <button type="submit" id="download-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="spinner" id="loading-spinner"></div>
+                <div class="error-message" id="error-message"></div>
+                
+                <div class="download-results" id="download-results">
+                    <h3>Download Options</h3>
+                    <div class="download-options" id="download-options">
+                        <!-- Options will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Premium Features</h2>
+                <p>Our downloader offers the best features to enhance your experience</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>No Watermark</h3>
+                    <p>Download videos without any annoying logos or watermarks from TikTok and other platforms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>High Speed</h3>
+                    <p>Fast downloads with our optimized servers that deliver your content in seconds.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices including smartphones and tablets.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure</h3>
+                    <p>Your data is safe with us. We don't store your downloaded content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>HD Quality</h3>
+                    <p>Get the highest possible quality for both videos and images.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Unlimited</h3>
+                    <p>No limits on downloads. Get as many videos and images as you want.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Downloading videos and images has never been easier</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Copy Link</h3>
+                    <p>Copy the video or image URL from your favorite platform.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Paste URL</h3>
+                    <p>Paste the link in the input field above and select the platform.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download</h3>
+                    <p>Click the download button and get your content without watermark.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="results" id="supported-platforms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Supported Platforms</h2>
+                <p>Download from all these popular social media platforms</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="TikTok">
+                    </div>
+                    <div class="result-info">
+                        <h3>TikTok Videos</h3>
+                        <p>Download TikTok videos without watermark in HD quality.</p>
+                        <a href="#" class="download-btn">Download Now</a>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Instagram">
+                    </div>
+                    <div class="result-info">
+                        <h3>Instagram Posts</h3>
+                        <p>Download photos, videos, and reels from Instagram.</p>
+                        <a href="#" class="download-btn">Download Now</a>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1611162616475-46592b32151b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Facebook">
+                    </div>
+                    <div class="result-info">
+                        <h3>Facebook Videos</h3>
+                        <p>Save videos from Facebook to your device with one click.</p>
+                        <a href="#" class="download-btn">Download Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kunn Sóc Lọ</h3>
+                    <p>The premium video and image downloader for all your favorite social media platforms.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#supported-platforms">Supported Platforms</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@kunnsoclo.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Download Street, Internet City</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Kunn Sóc Lọ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Platform selection
+        const platformBtns = document.querySelectorAll('.platform-btn');
+        platformBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                platformBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update placeholder based on selected platform
+                const platform = btn.getAttribute('data-platform');
+                const urlInput = document.getElementById('video-url');
+                
+                switch(platform) {
+                    case 'tiktok':
+                        urlInput.placeholder = 'https://www.tiktok.com/@username/video/123456789';
+                        break;
+                    case 'facebook':
+                        urlInput.placeholder = 'https://www.facebook.com/watch/?v=123456789';
+                        break;
+                    case 'instagram':
+                        urlInput.placeholder = 'https://www.instagram.com/p/ABC1234567/';
+                        break;
+                    case 'youtube':
+                        urlInput.placeholder = 'https://www.youtube.com/watch?v=ABC1234567';
+                        break;
+                    case 'twitter':
+                        urlInput.placeholder = 'https://twitter.com/username/status/123456789';
+                        break;
+                }
+            });
+        });
+        
+        // Download button functionality with API integration
+        document.getElementById('download-btn').addEventListener('click', async () => {
+            const url = document.getElementById('video-url').value.trim();
+            if (!url) {
+                showError('Please enter a valid URL');
+                return;
+            }
+            
+            const activePlatform = document.querySelector('.platform-btn.active').getAttribute('data-platform');
+            
+            // Show loading spinner
+            document.getElementById('loading-spinner').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('download-results').style.display = 'none';
+            
+            try {
+                // Call the appropriate API based on platform
+                let apiUrl = '';
+                let params = {};
+                
+                switch(activePlatform) {
+                    case 'tiktok':
+                        apiUrl = 'https://www.tikwm.com/api/';
+                        params = { url };
+                        break;
+                    case 'facebook':
+                        apiUrl = 'https://fbdownloader.net/api/';
+                        params = { url };
+                        break;
+                    case 'instagram':
+                        apiUrl = 'https://www.instagramsave.com/api/';
+                        params = { url };
+                        break;
+                    case 'youtube':
+                        apiUrl = 'https://ytdl-api.mohammadhosseinaref.workers.dev/';
+                        params = { url };
+                        break;
+                    case 'twitter':
+                        apiUrl = 'https://twitsave.com/api/';
+                        params = { url };
+                        break;
+                }
+                
+                // Make API request
+                const response = await fetch(`${apiUrl}?${new URLSearchParams(params)}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    showError(data.message || 'Failed to fetch download links');
+                    return;
+                }
+                
+                // Display download options
+                displayDownloadOptions(data, activePlatform);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred while processing your request');
+            } finally {
+                document.getElementById('loading-spinner').style.display = 'none';
+            }
+        });
+        
+        function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function displayDownloadOptions(data, platform) {
+            const optionsContainer = document.getElementById('download-options');
+            optionsContainer.innerHTML = '';
+            
+            // Platform-specific handling
+            if (platform === 'tiktok') {
+                // TikTok API response format
+                optionsContainer.innerHTML = `
+                    <div class="download-option">
+                        <h4>No Watermark Video</h4>
+                        <p>Highest quality without TikTok watermark</p>
+                        <button class="option-btn" onclick="downloadFile('${data.data.play}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="download-option">
+                        <h4>With Watermark</h4>
+                        <p>Original video with TikTok watermark</p>
+                        <button class="option-btn" onclick="downloadFile('${data.data.wmplay}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="download-option">
+                        <h4>Music Only</h4>
+                        <p>Download just the audio track</p>
+                        <button class="option-btn" onclick="downloadFile('${data.data.music}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                `;
+            } else if (platform === 'instagram') {
+                // Instagram API response format
+                if (data.type === 'image') {
+                    optionsContainer.innerHTML = `
+                        <div class="download-option">
+                            <h4>Image</h4>
+                            <p>Download the image in original quality</p>
+                            <button class="option-btn" onclick="downloadFile('${data.url}')">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    `;
+                } else if (data.type === 'video') {
+                    optionsContainer.innerHTML = `
+                        <div class="download-option">
+                            <h4>Video</h4>
+                            <p>Download the video in HD quality</p>
+                            <button class="option-btn" onclick="downloadFile('${data.url}')">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    `;
+                }
+            } else if (platform === 'youtube') {
+                // YouTube API response format
+                optionsContainer.innerHTML = `
+                    <div class="download-option">
+                        <h4>Video (HD)</h4>
+                        <p>Download video in 720p quality</p>
+                        <button class="option-btn" onclick="downloadFile('${data.video[0].url}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="download-option">
+                        <h4>Audio Only</h4>
+                        <p>Download just the audio track</p>
+                        <button class="option-btn" onclick="downloadFile('${data.audio[0].url}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // Show the results container
+            document.getElementById('download-results').style.display = 'block';
+        }
+        
+        function downloadFile(url) {
+            // Create a temporary anchor element to trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = true;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
